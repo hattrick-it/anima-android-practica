@@ -18,8 +18,10 @@ import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,38 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+@Composable
+fun mostrarTextos() {
+    Column(
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.size(width = 100.dp, height = 200.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .background(color = Color.Green)
+                .size(width = 80.dp, height = 60.dp)
+        ) {
+            Text(text = "Texto 1", modifier = Modifier.align(Alignment.BottomEnd))
+        }
+        Box(
+            modifier = Modifier
+                .background(color = Color.Black)
+                .size(width = 60.dp, height = 100.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.pizza),
+                contentDescription = "pizza",
+                modifier = Modifier
+                    .rotate(45f)
+            )
+            Image(modifier = Modifier.size(40.dp), painter = painterResource(id = R.drawable.logo), contentDescription = "logo")
+        }
+    }
+}
+
 
 @Composable
 fun Greeting(name: String, author: String) {
@@ -108,9 +142,6 @@ fun Greeting(name: String, author: String) {
 @Composable
 fun DefaultPreview() {
     MyApplicationTheme {
-        Column() {
-            Greeting("Android", "Google")
-        }
-
+        mostrarTextos()
     }
 }
